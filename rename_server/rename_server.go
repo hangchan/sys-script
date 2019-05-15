@@ -22,7 +22,7 @@ func main() {
 	//rt.RenameRacktable(oldServer, newServer)
 	//fmt.Println(ic.RenameIcinga(oldServer, newServer))
 	//co.RenameCobbler(oldServer, newServer)
-	im.RenameImm(oldServer, newServer, oldIp, newIp)
+	im.RenameImm(oldIp, newIp, oldServer, newServer)
 }
 
 // Replace entries in racktable

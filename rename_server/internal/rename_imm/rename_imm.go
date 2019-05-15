@@ -22,11 +22,15 @@ func RenameImm(oldIp string, newIp string, oldServer string, newServer string) {
 			show := cmd + " show " + k + " | tail -1"
 			showCmd := exec.Command("/bin/bash", "-c", show)
 			out, _ := showCmd.Output()
-			outArr := strings.Split(string(out), "=")
+			outStr := string(out)
+			outStr = strings.TrimSpace(outStr)
+			outArr := strings.Split(outStr, "=")
 			asu64[outArr[0]] = outArr[1]
 		}
 
-		if oldIp != asu64["IMM.HostIPAddress1"] || oldServer != asu64["IMM.HostName1"] {
+		if oldIp != asu64["IMM.HostIPAddress1"] || oldServer != asu64["IMM.IMMInfo_Name"] {
+			fmt.Println("Old Hostname:", asu64["IMM.IMMInfo_Name"])
+			fmt.Println("Old IP:", asu64["IMM.HostIPAddress1"])
 			fmt.Println("Old Hostname or IP Address doesn't match, exiting")
 		} else {
 			fmt.Println(cmd, "set", "IMM.HostIPAddress1", newIp)
