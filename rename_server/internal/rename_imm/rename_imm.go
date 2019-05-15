@@ -13,7 +13,7 @@ func RenameImm(oldIp string, newIp string, oldServer string, newServer string) {
 	asu64 := make(map[string]string)
 	asu64 = map[string]string{
 		"IMM.HostIPAddress1": "",
-		"IMM.HostName1":      "",
+		"IMM.IMMInfo_Name":   "",
 	}
 
 	if _, err := os.Stat(cmd); err == nil {
@@ -30,7 +30,7 @@ func RenameImm(oldIp string, newIp string, oldServer string, newServer string) {
 			fmt.Println("Old Hostname or IP Address doesn't match, exiting")
 		} else {
 			fmt.Println(cmd, "set", "IMM.HostIPAddress1", newIp)
-			fmt.Println(cmd, "set", "IMM.HostName1", newServer)
+			fmt.Println(cmd, "set", "IMM.IMMInfo_Name", newServer)
 		}
 
 	} else {
