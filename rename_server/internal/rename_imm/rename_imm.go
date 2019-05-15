@@ -12,9 +12,8 @@ func RenameImm(oldIp string, newIp string, oldServer string, newServer string) {
 	cmd := "/opt/ibm/toolscenter/asu/asu64"
 	asu64 := make(map[string]string)
 	asu64 = map[string]string{
-		"IMM.HostIPAddress1":      "",
-		"IMM.DHCPAssignedHostIP1": "",
-		"IMM.IMMInfo_Name":        "",
+		"IMM.HostIPAddress1": "",
+		"IMM.HostName1":      "",
 	}
 
 	if _, err := os.Stat(cmd); err == nil {
@@ -27,12 +26,11 @@ func RenameImm(oldIp string, newIp string, oldServer string, newServer string) {
 			asu64[outArr[0]] = outArr[1]
 		}
 
-		if oldIp != asu64["IMM.HostIPAddress1"] || oldServer != asu64["IMM.IMMInfo_Name"] {
+		if oldIp != asu64["IMM.HostIPAddress1"] || oldServer != asu64["IMM.HostName1"] {
 			fmt.Println("Old Hostname or IP Address doesn't match, exiting")
 		} else {
 			fmt.Println(cmd, "set", "IMM.HostIPAddress1", newIp)
-			fmt.Println(cmd, "set", "IMM.DHCPAssignedHostIP1", newIp)
-			fmt.Println(cmd, "set", "IMM.IMMInfo_Name", newServer)
+			fmt.Println(cmd, "set", "IMM.HostName1", newServer)
 		}
 
 	} else {
